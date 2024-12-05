@@ -4,11 +4,11 @@ I'm Daniel Landgraf and a professional software engineer in Germany.
 
 I do web development professionally, specifically on the frontend, but also a little bit of backend work here and there. My main point of focus is to design and implement appealing user interfaces and the development process behind it.
 
-As a spare time hobby I also like C++, in particular Unreal Engine and other graphics related stuff. However I don't plan on doing C++ professionally due to the raise of new low-level languages such as Rust and Go, which will inevitably leave C++ developers with large legacy codebases to deal with. I personally don't like those newer languages.
+As a spare time hobby I also like C++, in particular Unreal Engine and other graphics related stuff. However I don't plan on doing C++ professionally due to the raise of new low-level languages such as Rust and Go, which will inevitably leave C++ developers with large legacy codebases to deal with. Since I strongly prefer classic C++ over those newer languages I chose to stick to web development as a professional career while pursuing C++ in my spare time.
 
 Apart from programming other hobbies of mine include playing the drums, fitness, baking and watching old movies (English only!)
 
-## 🔭 Currently working on
+## 🔭 I'm currently working on
 
 #### NGX Todo (https://ngx-todo.com, https://github.com/daniel2202x/ngx-todo)
 - A simple but awesome todo/note-taking app built with Angular
@@ -42,6 +42,7 @@ Currently I'm planning on doing a real project using C++. I was thinking about e
 ![SASS](https://img.shields.io/badge/SASS-hotpink.svg?style=for-the-badge&logo=SASS&logoColor=white)
 ![Bootstrap](https://img.shields.io/badge/bootstrap-%238511FA.svg?style=for-the-badge&logo=bootstrap&logoColor=white)
 ![ESLint](https://img.shields.io/badge/ESLint-4B3263?style=for-the-badge&logo=eslint&logoColor=white)
+![PWA](https://img.shields.io/badge/PWA-%235A0FC8?style=for-the-badge&logo=pwa&logoColor=white)
 ![Capacitor](https://img.shields.io/badge/Capacitor-%233880FF.svg?style=for-the-badge&logo=Capacitor&logoColor=white)
 ![Nginx](https://img.shields.io/badge/nginx-%23009639.svg?style=for-the-badge&logo=nginx&logoColor=white)
 ![cypress](https://img.shields.io/badge/-cypress-%23E5E5E5?style=for-the-badge&logo=cypress&logoColor=058a5e)
