@@ -43,7 +43,6 @@ Currently I'm planning on doing a real project using C++. I was thinking about e
 ![Bootstrap](https://img.shields.io/badge/bootstrap-%238511FA.svg?style=for-the-badge&logo=bootstrap&logoColor=white)
 ![ESLint](https://img.shields.io/badge/ESLint-4B3263?style=for-the-badge&logo=eslint&logoColor=white)
 ![PWA](https://img.shields.io/badge/PWA-%235A0FC8?style=for-the-badge&logo=pwa&logoColor=white)
-![Capacitor](https://img.shields.io/badge/Capacitor-%233880FF.svg?style=for-the-badge&logo=Capacitor&logoColor=white)
 ![Nginx](https://img.shields.io/badge/nginx-%23009639.svg?style=for-the-badge&logo=nginx&logoColor=white)
 ![cypress](https://img.shields.io/badge/-cypress-%23E5E5E5?style=for-the-badge&logo=cypress&logoColor=058a5e)
 ![JWT](https://img.shields.io/badge/JWT-black?style=for-the-badge&logo=JSON%20web%20tokens)
