@@ -2,21 +2,19 @@
 
 I'm Daniel Landgraf and a professional software engineer in Germany.
 
-I do web development professionally, specifically on the frontend, but also a little bit of backend work here and there. My main point of focus is to design and implement appealing user interfaces and the development process behind it.
+I do web development professionally, specifically on the frontend, but also a little bit of backend work here and there. My main point of focus is to design and implement appealing user interfaces and the development process behind it. I am however open to deepen my knowledge in other areas of software development such as the backend.
 
-As a spare time hobby I also like C++, in particular Unreal Engine and other graphics related stuff. However I don't plan on doing C++ professionally due to the raise of new low-level languages such as Rust and Go, which will inevitably leave C++ developers with large legacy codebases to deal with. Since I strongly prefer classic C++ over those newer languages I chose to stick to web development as a professional career while pursuing C++ in my spare time.
+As a spare time hobby I also like C++, in particular Unreal Engine and other graphics related stuff. However I don't plan on doing C++ professionally due to the raise of new low-level languages such as Rust and Go, which will inevitably leave C++ developers with large legacy codebases to deal with. Since I strongly prefer classic C++ over those newer languages I chose to stick to web development career-wise while pursuing C++ in my spare time.
 
 Apart from programming other hobbies of mine include playing the drums, fitness, baking and watching old movies (English only!)
 
 ## 🔭 I'm currently working on
 
-#### NGX Todo (https://ngx-todo.com, https://github.com/daniel2202x/ngx-todo)
+#### [NGX Todo](https://github.com/daniel2202x/ngx-todo)
 - A simple but awesome todo/note-taking app built with Angular
-- Runs on every platform:
-  - Android (via an APK)
-  - iOS (via a PWA)
-  - Desktop browsers (optimised for desktop and tablet screens)
-- Built using best practices: E2E testing, Docker, CI/CD automation
+- Can be installed on any platform as a PWA (native feel for web apps)
+- Optimised for different screen sizes
+- Built using best practices: E2E testing, Docker, CI/CD automation, cloud hosting
 - This project serves me to try out new Angular features in a real-world app
 
 #### C++ project
@@ -59,7 +57,7 @@ Currently I'm planning on doing a real project using C++. I was thinking about e
 ![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white)
 ![Firebase](https://img.shields.io/badge/firebase-a08021?style=for-the-badge&logo=firebase&logoColor=ffcd34)
 
-#### CI/CD & automation
+#### DevOps, CI/CD & automation
 ![GitHub Actions](https://img.shields.io/badge/github%20actions-%232671E5.svg?style=for-the-badge&logo=githubactions&logoColor=white)
 ![Dependabot](https://img.shields.io/badge/dependabot-025E8C?style=for-the-badge&logo=dependabot&logoColor=white)
 ![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
