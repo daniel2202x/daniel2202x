@@ -2,11 +2,11 @@
 
 I'm Daniel Landgraf and a professional software engineer in Germany.
 
-I do web development professionally, specifically on the frontend, but also a little bit of backend work here and there. My main point of focus is to design and implement appealing user interfaces and the development process behind it. I am however open to deepen my knowledge in other areas of software development such as the backend.
+I do web development professionally, specifically on the frontend, but also a little bit of backend work here and there. My main point of focus is to design and implement appealing user interfaces and the development process behind it.
 
-As a spare time hobby I also like C++, in particular Unreal Engine and other graphics related stuff. However I don't plan on doing C++ professionally due to the raise of new low-level languages such as Rust and Go, which will inevitably leave C++ developers with large legacy codebases to deal with. Since I strongly prefer classic C++ over those newer languages I chose to stick to web development career-wise while pursuing C++ in my spare time.
+As a spare time hobby I also like C++, in particular Unreal Engine and other graphics related stuff.
 
-Apart from programming other hobbies of mine include playing the drums, fitness, baking and watching old movies (English only!)
+Apart from programming other hobbies of mine include playing the drums, fitness, baking and watching old movies.
 
 ## 🔭 I'm currently working on
 
@@ -18,19 +18,15 @@ Apart from programming other hobbies of mine include playing the drums, fitness,
 - This project serves me to try out new Angular features in a real-world app
 
 #### C++ project
-Currently I'm planning on doing a real project using C++. I was thinking about either making a small browser engine from scratch using Vulkan (at least static HTML/CSS rendering) or a simple game in Unreal Engine. The former would help me deepen my understanding of how websites are actually rendered under the hood.
+Currently I'm planning on doing a real project using C++. I was thinking about either making a small browser engine from scratch using Vulkan (at least static HTML/CSS rendering) or a simple game in Unreal Engine.
 
 ## 💪 My tech skills
 
-#### Primary languages
+#### Languages
 ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
 ![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
 ![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
-
-#### Secondary languages
-![C#](https://img.shields.io/badge/c%23-%23239120.svg?style=for-the-badge&logo=csharp&logoColor=white)
-![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)
 ![C](https://img.shields.io/badge/c-%2300599C.svg?style=for-the-badge&logo=c&logoColor=white)
 ![C++](https://img.shields.io/badge/c++-%2300599C.svg?style=for-the-badge&logo=c%2B%2B&logoColor=white)
 
@@ -45,18 +41,6 @@ Currently I'm planning on doing a real project using C++. I was thinking about e
 ![cypress](https://img.shields.io/badge/-cypress-%23E5E5E5?style=for-the-badge&logo=cypress&logoColor=058a5e)
 ![JWT](https://img.shields.io/badge/JWT-black?style=for-the-badge&logo=JSON%20web%20tokens)
 
-#### Backend
-![.Net](https://img.shields.io/badge/.NET-5C2D91?style=for-the-badge&logo=.net&logoColor=white)
-![Spring](https://img.shields.io/badge/spring-%236DB33F.svg?style=for-the-badge&logo=spring&logoColor=white)
-![Hibernate](https://img.shields.io/badge/Hibernate-59666C?style=for-the-badge&logo=Hibernate&logoColor=white)
-![openapi initiative](https://img.shields.io/badge/openapi-%23000000.svg?style=for-the-badge&logo=openapiinitiative&logoColor=white)
-![Swagger](https://img.shields.io/badge/-Swagger-%23Clojure?style=for-the-badge&logo=swagger&logoColor=white)
-
-#### Databases
-![MicrosoftSQLServer](https://img.shields.io/badge/Microsoft%20SQL%20Server-CC2927?style=for-the-badge&logo=microsoft%20sql%20server&logoColor=white)
-![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white)
-![Firebase](https://img.shields.io/badge/firebase-a08021?style=for-the-badge&logo=firebase&logoColor=ffcd34)
-
 #### DevOps, CI/CD & automation
 ![GitHub Actions](https://img.shields.io/badge/github%20actions-%232671E5.svg?style=for-the-badge&logo=githubactions&logoColor=white)
 ![Dependabot](https://img.shields.io/badge/dependabot-025E8C?style=for-the-badge&logo=dependabot&logoColor=white)
@@ -65,12 +49,12 @@ Currently I'm planning on doing a real project using C++. I was thinking about e
 #### Development tools
 ![Visual Studio Code](https://img.shields.io/badge/Visual%20Studio%20Code-0078d7.svg?style=for-the-badge&logo=visual-studio-code&logoColor=white)
 ![Visual Studio](https://img.shields.io/badge/Visual%20Studio-5C2D91.svg?style=for-the-badge&logo=visual-studio&logoColor=white)
-![IntelliJ IDEA](https://img.shields.io/badge/IntelliJ-000000.svg?style=for-the-badge&logo=intellij-idea&logoColor=white)
 ![Linux](https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black)
 ![Windows](https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white)
 ![NPM](https://img.shields.io/badge/NPM-%23CB3837.svg?style=for-the-badge&logo=npm&logoColor=white)
 ![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
 ![Postman](https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=postman&logoColor=white)
+![Firebase](https://img.shields.io/badge/firebase-a08021?style=for-the-badge&logo=firebase&logoColor=ffcd34)
 
 #### Development process
 ![Confluence](https://img.shields.io/badge/confluence-%23172BF4.svg?style=for-the-badge&logo=confluence&logoColor=white)
