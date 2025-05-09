@@ -1,6 +1,6 @@
 # Cheat Sheet
 
-| Description | Linux | Windows | PowerShell |
+| Description | `bash` | `cmd.exe` | `PowerShell` |
 | --- | --- | --- | --- |
 
 ## File system
