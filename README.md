@@ -2,7 +2,7 @@
 
 I'm Daniel Landgraf and a professional software engineer in Germany.
 
-I do web development professionally, specifically on the frontend, but also a little bit of backend work here and there. My main point of focus is to design and implement appealing user interfaces and the development process behind it.
+I do web development professionally, specifically on the frontend, but also DevOps and a little bit of backend work here and there. My main point of focus is to design and implement appealing user interfaces and the development process behind it.
 
 As a spare time hobby I also like C++, in particular Unreal Engine and other graphics related stuff.
 
@@ -18,7 +18,7 @@ Apart from programming other hobbies of mine include playing the drums, fitness,
 - This project serves me to try out new Angular features in a real-world app
 
 #### C++ project
-Currently I'm planning on doing a real project using C++. I was thinking about either making a small browser engine from scratch using Vulkan (at least static HTML/CSS rendering) or a simple game in Unreal Engine.
+in progress
 
 ## 💪 My tech skills
 
