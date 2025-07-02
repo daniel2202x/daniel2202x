@@ -5,22 +5,26 @@
 | --- | --- | --- |
 | Navigation | `cd, pwd` |
 | List contents in current directory | `ls` |
-| List contents in other directory | `ls /other/directory` |
-| List contents including hidden ones | `ls -a` |
+| List contents in other directory | `ls directory` |
+| List contents including hidden items | `ls -a` |
 | List contents with details | `ls -l` |
-| List file details | `ls -l file.txt` |
-| List directory details | `ls -ld directory` |
+| View file details | `ls -l file.txt` |
+| View file details with human-readable file size | `ls -lh file.txt` |
+| View file details with inode number | `ls -li file.txt` |
+| View directory details | `ls -ld directory` |
+| View size of directory | `du -sh directory` |
 | List contents of directory recursively | `ls -R directory` |
+| List contents of directory in tree view | `tree directory` |
 | View contents of text file in scrollable view with basic search functionality | `less file.txt` <br> Page down: Scroll button or **CTRL+F** <br> Page up: **CTRL+B** <br> Search: Type **/searchterm** <br> Navigate search results: Type **n** or **N** <br> Exit less: Type **q** |
 
 ## Shell Basics
 | Description | `bash` | `PowerShell` |
 | --- | --- | --- |
-| Find out home directory of current user | `echo $HOME` |
-| Find out current username | `echo $USER` |
-| Find out current shell | `echo $SHELL` |
-| Find out current directory | `echo $PWD` |
-| Find out current type of terminal | `echo $TERM` |
+| Print home directory of current user | `echo $HOME` |
+| Print current username | `echo $USER` |
+| Print current shell | `echo $SHELL` |
+| Print current directory | `echo $PWD` |
+| Print current type of terminal | `echo $TERM` |
 | View installed shells | `cat /etc/shells` |
 | Change the default shell | `chsh -s /usr/bin/zsh` |
 | Find path for command | `which date` <br> `command -v date` <br> `whereis date` |
@@ -34,7 +38,6 @@
 | Permanently add a variable (all users) | create new script in `/etc/profile.d` |
 | Permanently add a variable (system) | Append to `/etc/environmentc`, then `source /etc/environment` |
 | View all current environment variables | `env` <br> `printenv` |
-| Make a script executable | `chmod +x script.sh` |
 | Run a script within the current shell | `source script.sh` |
 | Remove a variable | `unset VAR` |
 | Execute command in new shell | `sh -c "echo $SHELL"` |
@@ -50,7 +53,7 @@
 | Display details of current user | `id` |
 
 ## Files
-| | | |
+| Description | `bash` | `PowerShell` |
 | --- | --- | --- |
 | Create one or more new file(s) or modify existing file's last modified | `touch file.txt file2.txt` |
 | Create file with content | `echo "Hello World!" > file.txt` |
@@ -79,6 +82,7 @@
 | Ask before overwriting files | `cp -i *.txt directory` |
 | Only overwrite if source file is newer | `cp -u *.txt directory` |
 | Verbose copying | `cp -v file.txt file2.txt` |
+| Skip copying existing files | `cp -n *.txt directory` |
 | Preserve file attributes | `cp -p file.txt file2.txt` |
 | Remove a file | `rm file.txt` |
 | Remove an empty directory | `rmdir directory` |
@@ -108,3 +112,30 @@
 | Change group of file | `chown :group file.txt` <br> `chgrp group file.txt` |
 | Change owner and group of file | `chown user:group file.txt` |
 | Change owner of directory recursively | `chown -R user directory` |
+| Package directory to tarball | `tar -cvf archive.tar directory` |
+| View contents of tarball | `tar -tvf archive.tar` |
+| Extract files from tarball to directory | `tar -xvf archive.tar -C directory` |
+| Compress tarball with gzip | `gzip archive.tar` |
+| Package directory to gzip-compressed tarball | `tar -czvf archive.tar.gz directory` |
+| Package directory to bzip2-compressed tarball | `tar -cjvf archive.tar.bz2 directory` |
+| View contents of gzip-compressed tarball | `tar -tzvf archive.tar.gz` |
+| Extract files from gzip-compressed tarball to directory | `tar -xzvf archive.tar.gz -C directory` |
+| Compress directory with zip | `zip -r  archive.zip directory` |
+| Extract files from zip | `zip -d  directory archive.zip` |
+| Create hard link | `ln file.txt file2.txt` |
+| Create soft link | `ln -s file.txt file2.txt` |
+| **find**? |
+
+## Text Processing
+| Description | `bash` | `PowerShell` |
+| --- | --- | --- |
+| Concatenate and display files | `cat file.txt file2.txt` |
+| Concatenate and print in reverse | `tac file.txt` |
+| Search for patterns | `grep "error" file.txt` |
+| Search for patterns ignoring case sensitivity | `grep -i "error" file.txt` |
+| Search for patterns inverting the match | `grep -v "error" file.txt` |
+| Search for patterns recursively through directories **???** | `grep -i "error" ` |
+| Print first and third fields of each line | `awk "{print $1, $3}" file.txt` |
+| Replace text in file **-i -e ?** | `sed "s/old/new/g" file.txt` |
+| Extract second field from each line using a comma as the delimiter | `cut -d "," -f 2 file.csv` |
+| Sort lines **-n -r -k ??** | `sort file.txt` |
