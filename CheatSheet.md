@@ -3,7 +3,8 @@
 ## Navigation Basics
 | Description | `bash` | `PowerShell` |
 | --- | --- | --- |
-| Navigation | `cd, pwd` |
+| Navigate into a directory | `cd directory` |
+| Output the current directory | `pwd` |
 | List contents in current directory | `ls` |
 | List contents in other directory | `ls directory` |
 | List contents including hidden items | `ls -a` |
@@ -15,7 +16,7 @@
 | View size of directory | `du -sh directory` |
 | List contents of directory recursively | `ls -R directory` |
 | List contents of directory in tree view | `tree directory` |
-| View contents of text file in scrollable view with basic search functionality | `less file.txt` <br> Page down: Scroll button or **CTRL+F** <br> Page up: **CTRL+B** <br> Search: Type **/searchterm** <br> Navigate search results: Type **n** or **N** <br> Exit less: Type **q** |
+| View contents of text file in scrollable view with basic search functionality | `less file.txt` <br> Page down: Scroll button or **CTRL+F** <br> Page up: **CTRL+B** <br> Search: Type **/searchterm** <br> Navigate search results: Type **n** <br> Exit less: Type **q** |
 
 ## Shell Basics
 | Description | `bash` | `PowerShell` |
@@ -41,16 +42,16 @@
 | Run a script within the current shell | `source script.sh` |
 | Remove a variable | `unset VAR` |
 | Execute command in new shell | `sh -c "echo $SHELL"` |
-| Write stdout from command to file | `ls fffff > file.txt` <br> `ls fffff 1> file.txt` |
-| Append stdout from command to file | `ls fffff >> file.txt` <br> `ls fffff 1>> file.txt` |
-| Write stderr from command to file | `ls fffff 2> file.txt` |
-| Append stderr from command to file | `ls fffff 2>> file.txt` |
-| Write stdout and stderr from command to file | `ls fffff > file.txt 2>&1` <br> `ls fffff &> file.txt` |
+| Write stdout from command to file | `echo "Hello World" > file.txt` <br> `echo "Hello World" 1> file.txt` |
+| Append stdout from command to file | `echo "Hello World" >> file.txt` <br> `echo "Hello World" 1>> file.txt` |
+| Write stderr from command to file | `echo "Hello World" 2> file.txt` |
+| Append stderr from command to file | `echo "Hello World" 2>> file.txt` |
+| Write stdout and stderr from command to file | `echo "Hello World" > file.txt 2>&1` <br> `echo "Hello World" &> file.txt` |
 | Redirect stdout from one command to another one as stdin | `command1 \| command2` |
 | Redirect contents of file to command as stdin | `command < file.txt` |
-| **exec + xargs?** |
 | Display current username | `whoami` |
 | Display details of current user | `id` |
+| **exec + xargs ???** |
 
 ## Files
 | Description | `bash` | `PowerShell` |
@@ -93,7 +94,7 @@
 | Verbose removing | `rm -v file.txt` |
 | Remove without prompting | `rm -f file.txt` |
 | Permission format | `-rw-r--r--` <br> 1st character: file type (`-`, `d` or `l`) <br> 1st triplet: owner permissions <br> 2nd triplet: group permissions <br> 3rd triplet: others permissions |
-| Permission behaviour on directories | `r`, `w`, `x`: self-explanatory <br> `s` in user triplet: `setuid` (file is executed with owner's privileges) <br> `s` in group triplet: `setgid` (file is executed with group's privileges) |
+| Permission behaviour on files | `r`, `w`, `x`: self-explanatory <br> `s` in user triplet: `setuid` (file is executed with owner's privileges) <br> `s` in group triplet: `setgid` (file is executed with group's privileges) |
 | Permission behaviour on directories | `r`: contents can be shown (e. g. `ls`) <br> `w`: contents can be altered (e. g. create and delete files) <br> `x`: directory can be navigated using `cd` <br> `s` in group triplet: `setgid` (new files created within the directory inherid the GID of the directory) <br> `t` in others triplet: `sticky` (only the owner can delete or rename files within the directory) |
 | Give permission for owner, group and others to only execute a file | `chmod =x script.sh` <br> `chmod a=x script.sh` <br> `chmod ugo=x script.sh` |
 | Add permission for owner, group and others to execute a file | `chmod +x script.sh` <br> `chmod a+x script.sh` <br> `chmod ugo+x script.sh` |
@@ -124,7 +125,6 @@
 | Extract files from zip | `zip -d  directory archive.zip` |
 | Create hard link | `ln file.txt file2.txt` |
 | Create soft link | `ln -s file.txt file2.txt` |
-| **find**? |
 
 ## Text Processing
 | Description | `bash` | `PowerShell` |
@@ -134,8 +134,18 @@
 | Search for patterns | `grep "error" file.txt` |
 | Search for patterns ignoring case sensitivity | `grep -i "error" file.txt` |
 | Search for patterns inverting the match | `grep -v "error" file.txt` |
-| Search for patterns recursively through directories **???** | `grep -i "error" ` |
+| Search for patterns recursively through directories **???** | `grep -i "error"` |
 | Print first and third fields of each line | `awk "{print $1, $3}" file.txt` |
-| Replace text in file **-i -e ?** | `sed "s/old/new/g" file.txt` |
+| Replace text in file **-i -e ???** | `sed "s/old/new/g" file.txt` |
 | Extract second field from each line using a comma as the delimiter | `cut -d "," -f 2 file.csv` |
-| Sort lines **-n -r -k ??** | `sort file.txt` |
+| Sort lines **-n -r -k ???** | `sort file.txt` |
+| Omit consecutive duplicate lines **-c -d -u ???** | `sort file.txt \| uniq` |
+| Print first 10 lines of a file **-n ???** | `head file.txt` |
+| Print last 10 lines of a file **-n -f ???** | `tail file.txt` |
+| Transform to uppercase **-d -s ???** | `echo "hello" \| tr 'a-z 'A-Z'` |
+| Print number of lines, words and characters **-l -w -c ???** | `wc file.txt` |
+| Wrap lines at 50 characters | `fmt -w 50 file.txt` |
+| Print line numbers | `ln file.txt` |
+| Print line numbers with padding | `nl -s '. ' -w 10 file.txt` |
+
+https://ryanstutorials.net/linuxtutorial/filters.php
