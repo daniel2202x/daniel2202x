@@ -1,7 +1,7 @@
 services:
   letsencrypt:
     image: linuxserver/swag:4.2.0
-    container_name: letsencrypt
+    container_name: letsencrypt-fluently-dev
     environment:
       PUID: 1000
       PGID: 1000
@@ -17,4 +17,7 @@ services:
       - host.docker.internal:host-gateway
     volumes:
       - ./default.conf:/config/nginx/site-confs/default.conf
-      - ./letsencrypt_data:/config/etc/letsencrypt
+      - letsencrypt_fluently_dev_config:/config
+
+volumes:
+  letsencrypt_fluently_dev_config:
