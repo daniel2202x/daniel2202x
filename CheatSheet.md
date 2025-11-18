@@ -1,151 +1,235 @@
 # Cheat Sheet
 
-## Navigation Basics
-| Description | `bash` | `PowerShell` |
-| --- | --- | --- |
-| Navigate into a directory | `cd directory` |
-| Output the current directory | `pwd` |
-| List contents in current directory | `ls` |
-| List contents in other directory | `ls directory` |
-| List contents including hidden items | `ls -a` |
-| List contents with details | `ls -l` |
-| View file details | `ls -l file.txt` |
-| View file details with human-readable file size | `ls -lh file.txt` |
-| View file details with inode number | `ls -li file.txt` |
-| View directory details | `ls -ld directory` |
-| View size of directory | `du -sh directory` |
-| List contents of directory recursively | `ls -R directory` |
-| List contents of directory in tree view | `tree directory` |
-| View contents of text file in scrollable view with basic search functionality | `less file.txt` <br> Page down: Scroll button or **CTRL+F** <br> Page up: **CTRL+B** <br> Search: Type **/searchterm** <br> Navigate search results: Type **n** <br> Exit less: Type **q** |
+## Navigation
 
-## Shell Basics
-| Description | `bash` | `PowerShell` |
-| --- | --- | --- |
-| Print home directory of current user | `echo $HOME` |
-| Print current username | `echo $USER` |
-| Print current shell | `echo $SHELL` |
-| Print current directory | `echo $PWD` |
-| Print current type of terminal | `echo $TERM` |
-| View installed shells | `cat /etc/shells` |
-| Change the default shell | `chsh -s /usr/bin/zsh` |
-| Find path for command | `which date` <br> `command -v date` <br> `whereis date` |
-| View details about command | `type date` |
-| Find resolved path of symlink | `realpath /bin/ls` <br> `readlink -f /bin/ls` <br> `ls -ld /bin` |
-| Find all files with filename | `locate -b '\date'` <br> `find / -name "date" -ls` |
-| List all files installed by package | `dpkg -L docker-ce` |
-| Display package information | `apt show docker-ce` |
-| Make variable available for child processes of current shell | `export VAR="value"` |
-| Permanently add a variable (user) | Append to `~/.bashrc`, then `source ~/.bashrc` |
-| Permanently add a variable (all users) | create new script in `/etc/profile.d` |
-| Permanently add a variable (system) | Append to `/etc/environmentc`, then `source /etc/environment` |
-| View all current environment variables | `env` <br> `printenv` |
-| Run a script within the current shell | `source script.sh` |
-| Remove a variable | `unset VAR` |
-| Execute command in new shell | `sh -c "echo $SHELL"` |
-| Write stdout from command to file | `echo "Hello World" > file.txt` <br> `echo "Hello World" 1> file.txt` |
-| Append stdout from command to file | `echo "Hello World" >> file.txt` <br> `echo "Hello World" 1>> file.txt` |
-| Write stderr from command to file | `echo "Hello World" 2> file.txt` |
-| Append stderr from command to file | `echo "Hello World" 2>> file.txt` |
-| Write stdout and stderr from command to file | `echo "Hello World" > file.txt 2>&1` <br> `echo "Hello World" &> file.txt` |
-| Redirect stdout from one command to another one as stdin | `command1 \| command2` |
-| Redirect contents of file to command as stdin | `command < file.txt` |
-| Display current username | `whoami` |
-| Display details of current user | `id` |
-| **exec + xargs ???** |
+| Description                                                                               | `bash`                                                                                                                                                                                     | `PowerShell` |
+| ----------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------ |
+| Navigate into a directory                                                                 | `cd directory`                                                                                                                                                                             |
+| Output the current directory                                                              | `pwd`                                                                                                                                                                                      |
+| List contents of current directory                                                        | `ls`                                                                                                                                                                                       |
+| List contents of other directory                                                          | `ls directory`                                                                                                                                                                             |
+| List contents including hidden items                                                      | `ls -a`                                                                                                                                                                                    |
+| List contents with details                                                                | `ls -l`                                                                                                                                                                                    |
+| View file details                                                                         | `ls -l file.txt`                                                                                                                                                                           |
+| View file details with human-readable file size                                           | `ls -lh file.txt`                                                                                                                                                                          |
+| View file details with inode number                                                       | `ls -li file.txt`                                                                                                                                                                          |
+| View directory details                                                                    | `ls -ld directory`                                                                                                                                                                         |
+| View size of directory                                                                    | `du -sh directory`                                                                                                                                                                         |
+| List contents of directory recursively                                                    | `ls -R directory`                                                                                                                                                                          |
+| List contents of directory in tree view                                                   | `tree directory`                                                                                                                                                                           |
+| View contents of text file in scrollable view with basic search functionality             | `less file.txt` <br> Page down: Scroll button or **CTRL+F** <br> Page up: **CTRL+B** <br> Search: Type **/searchterm** <br> Navigate search results: Type **n** <br> Exit less: Type **q** |
+| Find any txt files following symbolic links                                               | `find -L directory -name '*.txt'`                                                                                                                                                          |
+| Find any txt files and print file details                                                 | `find directory -type f -name '*.txt' -ls`                                                                                                                                                 |
+| Find any non-txt files                                                                    | `find directory -type f -not -name '*.txt'`                                                                                                                                                |
+| Type for finding files                                                                    | `f`: regular files<br>`d`: directories<br>`l`: symbolic links<br>`c`: character devices<br>`b`: block devices<br>`p`: named pipes<br>`s`: sockets                                          |
+| Recursively change permissions for all files in a directory                               | `find directory -type f -exec chmod 0644 {} \;`                                                                                                                                            |
+| Find any files of exactly 1024 bytes in size                                              | `find directory -type f -size 1024c`                                                                                                                                                       |
+| Find any files greater than 1MB in size                                                   | `find directory -type f -size +1M`                                                                                                                                                         |
+| Find any files between 1MB and 10MB in size                                               | `find directory -type f -size +1M -size -10M`                                                                                                                                              |
+| Size units for finding files                                                              | `b`: 512-byte blocks (default)<br>`c`: bytes<br>`w`: two-byte words<br>`k`: kilobytes<br>`M`: megabytes<br>`G`: gigabytes                                                                  |
+| Find any txt files modified in the last five days                                         | `find directory -name '*.txt' -mtime 5`                                                                                                                                                    |
+| Find any files modified 30 or more days ago                                               | `find directory -mtime +30 -daystart`                                                                                                                                                      |
+| Find any files with permissions of exactly 777                                            | `find directory -perm 777`                                                                                                                                                                 |
+| Find any files where at least user, group or others have at least the respective bits set | `find directory -perm /444`                                                                                                                                                                |
+| Find any files where user, group and others have at least the respective bits set         | `find directory -perm -444`                                                                                                                                                                |
+| Change ownership to nginx for any files owned by www-data                                 | `find directory -user www-data -type f  -exec chown nginx {} \;`                                                                                                                           |
+| Delete any files and empty directories containing the letter 'a'                          | `find directory -name '*a*' -delete`                                                                                                                                                       |
+
+## Shell
+
+| Description                                                             | `bash`                                                                                 | `PowerShell` |
+| ----------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | ------------ |
+| Print home directory of current user                                    | `echo $HOME`                                                                           |
+| Print current username                                                  | `echo $USER`                                                                           |
+| Print current shell                                                     | `echo $SHELL`                                                                          |
+| Print current directory                                                 | `echo $PWD`                                                                            |
+| Print current type of terminal                                          | `echo $TERM`                                                                           |
+| View installed shells                                                   | `cat /etc/shells`                                                                      |
+| Change the default shell                                                | `chsh -s /usr/bin/zsh`                                                                 |
+| Find path for command                                                   | `which date` <br> `command -v date` <br> `whereis date`                                |
+| View details about command                                              | `type date`                                                                            |
+| Find resolved path of symlink                                           | `realpath /bin/ls` <br> `readlink -f /bin/ls` <br> `ls -ld /bin`                       |
+| List all files installed by package                                     | `dpkg -L docker-ce`                                                                    |
+| Display package information                                             | `apt show docker-ce`                                                                   |
+| Make variable available for child processes of current shell            | `export VAR='value'`                                                                   |
+| Permanently add a variable (user)                                       | Append to `~/.bashrc`, then `source ~/.bashrc`                                         |
+| Permanently add a variable (all users)                                  | create new script in `/etc/profile.d`                                                  |
+| Permanently add a variable (system)                                     | Append to `/etc/environmentc`, then `source /etc/environment`                          |
+| View all current environment variables                                  | `env` <br> `printenv`                                                                  |
+| Run a script within the current shell                                   | `source script.sh`                                                                     |
+| Remove a variable                                                       | `unset VAR`                                                                            |
+| Execute command in new shell                                            | `sh -c "echo $SHELL"`                                                                  |
+| Write stdout from command to file                                       | `echo 'Hello World' > file.txt` <br> `echo 'Hello World' 1> file.txt`                  |
+| Append stdout from command to file                                      | `echo 'Hello World' >> file.txt` <br> `echo 'Hello World' 1>> file.txt`                |
+| Write stderr from command to file                                       | `echo 'Hello World' 2> file.txt`                                                       |
+| Append stderr from command to file                                      | `echo 'Hello World' 2>> file.txt`                                                      |
+| Write stdout and stderr from command to file                            | `echo 'Hello World' > file.txt 2>&1` <br> `echo 'Hello World' &> file.txt`             |
+| Redirect stdout from one command to another one as stdin                | `command1 \| command2`                                                                 |
+| Redirect contents of file to command as stdin                           | `command < file.txt`                                                                   |
+| Display current username                                                | `whoami`                                                                               |
+| Display details of current user                                         | `id`                                                                                   |
+| Pass output of one command as argument to another command               | `command1 \| xargs command2`                                                           |
+| Pass output of one command as one argument at a time to another command | `command1 \| xargs -n 1 command2`                                                      |
+| Remove all files in the current directory                               | `ls \| xargs rm`                                                                       |
+| Remove all files in the current directory and prompt before running     | `ls \| xargs -p rm`                                                                    |
+| Redirect output in entire script                                        | <pre><code>#!/bin/bash<br>exec 1> output.txt<br>exec 2> errors.txt<br>...</code></pre> |
+| Create multiline file in one command                                    | <pre><code>cat << EOF > file.txt<br>line 1<br>line 2<br>line 3<br>EOF</code></pre>     |
+| **shell scripting**                                                     |
 
 ## Files
-| Description | `bash` | `PowerShell` |
-| --- | --- | --- |
-| Create one or more new file(s) or modify existing file's last modified | `touch file.txt file2.txt` |
-| Create file with content | `echo "Hello World!" > file.txt` |
-| Create file interactively | `cat > file.txt` <br> Save with **CTRL+D** |
-| View text file on the terminal | `cat file.txt` |
-| Edit a text file in the terminal | `nano file.txt` |
-| Create a directory | `mkdir directory` |
-| Create directory structure | `mkdir -p some/nested/directory` |
-| Rename a file | `mv file.txt file2.txt` |
-| Move file into directory | `mv file.txt directory` |
-| Move and rename | `mv file.txt directory/file2.txt` |
-| Move multiple files | `mv file.txt file2.txt directory` |
-| Move multiple files | `mv *.txt directory` |
-| Move or rename a directory | `mv directory directory2`|
-| Ask before overwriting files | `mv -i *.txt directory` |
-| Only overwrite if source file is newer | `mv -u *.txt directory` |
-| Verbose moving | `mv -v file.txt file2.txt` |
-| Skip moving existing files | `mv -n *.txt directory` |
-| Overwrite protected file without prompting | `mv -f file.txt file2.txt` |
-| Create backup before moving | `mv -S .back -b file.txt directory/file.txt` |
-| Copy a file | `cp file file2.txt` |
-| Copy file into directory | `cp file.txt directory` |
-| Copy multiple files | `cp file.txt file2.txt directory` |
-| Copy multiple files | `cp *.txt directory` |
-| Copy a directory | `cp -r directory directory2` |
-| Ask before overwriting files | `cp -i *.txt directory` |
-| Only overwrite if source file is newer | `cp -u *.txt directory` |
-| Verbose copying | `cp -v file.txt file2.txt` |
-| Skip copying existing files | `cp -n *.txt directory` |
-| Preserve file attributes | `cp -p file.txt file2.txt` |
-| Remove a file | `rm file.txt` |
-| Remove an empty directory | `rmdir directory` |
-| Remove a non-empty directory | `rm -r directory` |
-| Remove multiple files | `rm file.txt file2.txt` |
-| Remove multiple files | `rm *.txt` |
-| Ask before removing | `rm -i file.txt` |
-| Verbose removing | `rm -v file.txt` |
-| Remove without prompting | `rm -f file.txt` |
-| Permission format | `-rw-r--r--` <br> 1st character: file type (`-`, `d` or `l`) <br> 1st triplet: owner permissions <br> 2nd triplet: group permissions <br> 3rd triplet: others permissions |
-| Permission behaviour on files | `r`, `w`, `x`: self-explanatory <br> `s` in user triplet: `setuid` (file is executed with owner's privileges) <br> `s` in group triplet: `setgid` (file is executed with group's privileges) |
-| Permission behaviour on directories | `r`: contents can be shown (e. g. `ls`) <br> `w`: contents can be altered (e. g. create and delete files) <br> `x`: directory can be navigated using `cd` <br> `s` in group triplet: `setgid` (new files created within the directory inherid the GID of the directory) <br> `t` in others triplet: `sticky` (only the owner can delete or rename files within the directory) |
-| Give permission for owner, group and others to only execute a file | `chmod =x script.sh` <br> `chmod a=x script.sh` <br> `chmod ugo=x script.sh` |
-| Add permission for owner, group and others to execute a file | `chmod +x script.sh` <br> `chmod a+x script.sh` <br> `chmod ugo+x script.sh` |
-| Remove permission for owner, group and others to execute a file | `chmod -x script.sh` <br> `chmod a-x script.sh` <br> `chmod ugo-x script.sh` |
-| Add permission for owner to execute a file | `chmod u+x script.sh` |
-| Add permission for group to execute a file | `chmod g+x script.sh` |
-| Add permission for others to execute a file | `chmod o+x script.sh` |
-| Remove all permissions for others | `chmod o= script.sh` <br> `chmod o-rwx` |
-| Give all permissions to the owner and read permissions to the group and others | `chmod u=rwx,go=r script.sh` |
-| Give read permissions for other users for a directory recursively | `chmod -R o=r directory` |
-| Numeric permissions | read = 4 <br> write = 2 <br> execute = 1 <br> no permissions = 0 |
-| Numeric permissions with optional fourth digit | setuid = 4 <br> setgid = 2 <br> sticky = 1 <br> no changes = 0 |
-| Check permissions in numeric notation | `stat -c "%a" script.sh` |
-| Give all permissions to owner, group and others | `chmod 777 script.sh` |
-| Change owner of file | `chown user file.txt` |
-| Change group of file | `chown :group file.txt` <br> `chgrp group file.txt` |
-| Change owner and group of file | `chown user:group file.txt` |
-| Change owner of directory recursively | `chown -R user directory` |
-| Package directory to tarball | `tar -cvf archive.tar directory` |
-| View contents of tarball | `tar -tvf archive.tar` |
-| Extract files from tarball to directory | `tar -xvf archive.tar -C directory` |
-| Compress tarball with gzip | `gzip archive.tar` |
-| Package directory to gzip-compressed tarball | `tar -czvf archive.tar.gz directory` |
-| Package directory to bzip2-compressed tarball | `tar -cjvf archive.tar.bz2 directory` |
-| View contents of gzip-compressed tarball | `tar -tzvf archive.tar.gz` |
-| Extract files from gzip-compressed tarball to directory | `tar -xzvf archive.tar.gz -C directory` |
-| Compress directory with zip | `zip -r  archive.zip directory` |
-| Extract files from zip | `zip -d  directory archive.zip` |
-| Create hard link | `ln file.txt file2.txt` |
-| Create soft link | `ln -s file.txt file2.txt` |
+
+| Description                                                                    | `bash`                                                                                                                                                                                                                                                                                                                                                                             | `PowerShell` |
+| ------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ |
+| Create one or more new file(s) or modify existing file's last modified         | `touch file.txt file2.txt`                                                                                                                                                                                                                                                                                                                                                         |
+| Create file with content                                                       | `echo 'Hello World' > file.txt`                                                                                                                                                                                                                                                                                                                                                    |
+| Create file interactively                                                      | `cat > file.txt` <br> Save with **CTRL+D**                                                                                                                                                                                                                                                                                                                                         |
+| View text file on the terminal                                                 | `cat file.txt`                                                                                                                                                                                                                                                                                                                                                                     |
+| Edit a text file in the terminal                                               | `nano file.txt`                                                                                                                                                                                                                                                                                                                                                                    |
+| Create a directory                                                             | `mkdir directory`                                                                                                                                                                                                                                                                                                                                                                  |
+| Create directory structure                                                     | `mkdir -p some/nested/directory`                                                                                                                                                                                                                                                                                                                                                   |
+| Rename a file                                                                  | `mv file.txt file2.txt`                                                                                                                                                                                                                                                                                                                                                            |
+| Move file into directory                                                       | `mv file.txt directory`                                                                                                                                                                                                                                                                                                                                                            |
+| Move and rename                                                                | `mv file.txt directory/file2.txt`                                                                                                                                                                                                                                                                                                                                                  |
+| Move multiple files                                                            | `mv file.txt file2.txt directory`                                                                                                                                                                                                                                                                                                                                                  |
+| Move multiple files                                                            | `mv *.txt directory`                                                                                                                                                                                                                                                                                                                                                               |
+| Move or rename a directory                                                     | `mv directory directory2`                                                                                                                                                                                                                                                                                                                                                          |
+| Ask before overwriting files                                                   | `mv -i *.txt directory`                                                                                                                                                                                                                                                                                                                                                            |
+| Only overwrite if source file is newer                                         | `mv -u *.txt directory`                                                                                                                                                                                                                                                                                                                                                            |
+| Verbose moving                                                                 | `mv -v file.txt file2.txt`                                                                                                                                                                                                                                                                                                                                                         |
+| Skip moving existing files                                                     | `mv -n *.txt directory`                                                                                                                                                                                                                                                                                                                                                            |
+| Overwrite protected file without prompting                                     | `mv -f file.txt file2.txt`                                                                                                                                                                                                                                                                                                                                                         |
+| Create backup before moving                                                    | `mv -S .back -b file.txt directory/file.txt`                                                                                                                                                                                                                                                                                                                                       |
+| Copy a file                                                                    | `cp file file2.txt`                                                                                                                                                                                                                                                                                                                                                                |
+| Copy file into directory                                                       | `cp file.txt directory`                                                                                                                                                                                                                                                                                                                                                            |
+| Copy multiple files                                                            | `cp file.txt file2.txt directory`                                                                                                                                                                                                                                                                                                                                                  |
+| Copy multiple files                                                            | `cp *.txt directory`                                                                                                                                                                                                                                                                                                                                                               |
+| Copy a directory                                                               | `cp -r directory directory2`                                                                                                                                                                                                                                                                                                                                                       |
+| Ask before overwriting files                                                   | `cp -i *.txt directory`                                                                                                                                                                                                                                                                                                                                                            |
+| Only overwrite if source file is newer                                         | `cp -u *.txt directory`                                                                                                                                                                                                                                                                                                                                                            |
+| Verbose copying                                                                | `cp -v file.txt file2.txt`                                                                                                                                                                                                                                                                                                                                                         |
+| Skip copying existing files                                                    | `cp -n *.txt directory`                                                                                                                                                                                                                                                                                                                                                            |
+| Preserve file attributes                                                       | `cp -p file.txt file2.txt`                                                                                                                                                                                                                                                                                                                                                         |
+| Remove a file                                                                  | `rm file.txt`                                                                                                                                                                                                                                                                                                                                                                      |
+| Remove an empty directory                                                      | `rmdir directory`                                                                                                                                                                                                                                                                                                                                                                  |
+| Remove a non-empty directory                                                   | `rm -r directory`                                                                                                                                                                                                                                                                                                                                                                  |
+| Remove multiple files                                                          | `rm file.txt file2.txt`                                                                                                                                                                                                                                                                                                                                                            |
+| Remove multiple files                                                          | `rm *.txt`                                                                                                                                                                                                                                                                                                                                                                         |
+| Ask before removing                                                            | `rm -i file.txt`                                                                                                                                                                                                                                                                                                                                                                   |
+| Verbose removing                                                               | `rm -v file.txt`                                                                                                                                                                                                                                                                                                                                                                   |
+| Remove without prompting                                                       | `rm -f file.txt`                                                                                                                                                                                                                                                                                                                                                                   |
+| Permission format                                                              | `-rw-r--r--` <br> 1st character: file type (`-`, `d` or `l`) <br> 1st triplet: owner permissions <br> 2nd triplet: group permissions <br> 3rd triplet: others permissions                                                                                                                                                                                                          |
+| Permission behaviour on files                                                  | `r`, `w`, `x`: self-explanatory <br> `s` in user triplet: `setuid` (file is executed with owner's privileges) <br> `s` in group triplet: `setgid` (file is executed with group's privileges)                                                                                                                                                                                       |
+| Permission behaviour on directories                                            | `r`: contents can be shown (e. g. `ls`) <br> `w`: contents can be altered (e. g. create and delete files) <br> `x`: directory can be navigated into using `cd` <br> `s` in group triplet: `setgid` (new files created within the directory inherid the GID of the directory) <br> `t` in others triplet: `sticky` (only the owner can delete or rename files within the directory) |
+| Give permission for owner, group and others to only execute a file             | `chmod =x script.sh` <br> `chmod a=x script.sh` <br> `chmod ugo=x script.sh`                                                                                                                                                                                                                                                                                                       |
+| Add permission for owner, group and others to execute a file                   | `chmod +x script.sh` <br> `chmod a+x script.sh` <br> `chmod ugo+x script.sh`                                                                                                                                                                                                                                                                                                       |
+| Remove permission for owner, group and others to execute a file                | `chmod -x script.sh` <br> `chmod a-x script.sh` <br> `chmod ugo-x script.sh`                                                                                                                                                                                                                                                                                                       |
+| Add permission for owner to execute a file                                     | `chmod u+x script.sh`                                                                                                                                                                                                                                                                                                                                                              |
+| Add permission for group to execute a file                                     | `chmod g+x script.sh`                                                                                                                                                                                                                                                                                                                                                              |
+| Add permission for others to execute a file                                    | `chmod o+x script.sh`                                                                                                                                                                                                                                                                                                                                                              |
+| Remove all permissions for others                                              | `chmod o= script.sh` <br> `chmod o-rwx`                                                                                                                                                                                                                                                                                                                                            |
+| Give all permissions to the owner and read permissions to the group and others | `chmod u=rwx,go=r script.sh`                                                                                                                                                                                                                                                                                                                                                       |
+| Give read permissions for other users for a directory recursively              | `chmod -R o=r directory`                                                                                                                                                                                                                                                                                                                                                           |
+| Numeric permissions                                                            | read = 4 <br> write = 2 <br> execute = 1 <br> no permissions = 0                                                                                                                                                                                                                                                                                                                   |
+| Numeric permissions with optional fourth digit                                 | setuid = 4 <br> setgid = 2 <br> sticky = 1 <br> no changes = 0                                                                                                                                                                                                                                                                                                                     |
+| Check permissions in numeric notation                                          | `stat -c '%a' script.sh`                                                                                                                                                                                                                                                                                                                                                           |
+| Give all permissions to owner, group and others                                | `chmod 777 script.sh`                                                                                                                                                                                                                                                                                                                                                              |
+| Change owner of file                                                           | `chown user file.txt`                                                                                                                                                                                                                                                                                                                                                              |
+| Change group of file                                                           | `chown :group file.txt` <br> `chgrp group file.txt`                                                                                                                                                                                                                                                                                                                                |
+| Change owner and group of file                                                 | `chown user:group file.txt`                                                                                                                                                                                                                                                                                                                                                        |
+| Change owner of directory recursively                                          | `chown -R user directory`                                                                                                                                                                                                                                                                                                                                                          |
+| Package directory to tarball                                                   | `tar -cvf archive.tar directory`                                                                                                                                                                                                                                                                                                                                                   |
+| View contents of tarball                                                       | `tar -tvf archive.tar`                                                                                                                                                                                                                                                                                                                                                             |
+| Extract files from tarball to directory                                        | `tar -xvf archive.tar -C directory`                                                                                                                                                                                                                                                                                                                                                |
+| Compress tarball with gzip                                                     | `gzip archive.tar`                                                                                                                                                                                                                                                                                                                                                                 |
+| Package directory to gzip-compressed tarball                                   | `tar -czvf archive.tar.gz directory`                                                                                                                                                                                                                                                                                                                                               |
+| Package directory to bzip2-compressed tarball                                  | `tar -cjvf archive.tar.bz2 directory`                                                                                                                                                                                                                                                                                                                                              |
+| View contents of gzip-compressed tarball                                       | `tar -tzvf archive.tar.gz`                                                                                                                                                                                                                                                                                                                                                         |
+| Extract files from gzip-compressed tarball to directory                        | `tar -xzvf archive.tar.gz -C directory`                                                                                                                                                                                                                                                                                                                                            |
+| Compress directory with zip                                                    | `zip -r archive.zip directory`                                                                                                                                                                                                                                                                                                                                                     |
+| Extract files from zip                                                         | `zip -d directory archive.zip`                                                                                                                                                                                                                                                                                                                                                     |
+| Create hard link                                                               | `ln file.txt file2.txt`                                                                                                                                                                                                                                                                                                                                                            |
+| Create soft link                                                               | `ln -s file.txt file2.txt`                                                                                                                                                                                                                                                                                                                                                         |
 
 ## Text Processing
-| Description | `bash` | `PowerShell` |
-| --- | --- | --- |
-| Concatenate and display files | `cat file.txt file2.txt` |
-| Concatenate and print in reverse | `tac file.txt` |
-| Search for patterns | `grep "error" file.txt` |
-| Search for patterns ignoring case sensitivity | `grep -i "error" file.txt` |
-| Search for patterns inverting the match | `grep -v "error" file.txt` |
-| Search for patterns recursively through directories **???** | `grep -i "error"` |
-| Print first and third fields of each line | `awk "{print $1, $3}" file.txt` |
-| Replace text in file **-i -e ???** | `sed "s/old/new/g" file.txt` |
-| Extract second field from each line using a comma as the delimiter | `cut -d "," -f 2 file.csv` |
-| Sort lines **-n -r -k ???** | `sort file.txt` |
-| Omit consecutive duplicate lines **-c -d -u ???** | `sort file.txt \| uniq` |
-| Print first 10 lines of a file **-n ???** | `head file.txt` |
-| Print last 10 lines of a file **-n -f ???** | `tail file.txt` |
-| Transform to uppercase **-d -s ???** | `echo "hello" \| tr 'a-z 'A-Z'` |
-| Print number of lines, words and characters **-l -w -c ???** | `wc file.txt` |
-| Wrap lines at 50 characters | `fmt -w 50 file.txt` |
-| Print line numbers | `ln file.txt` |
-| Print line numbers with padding | `nl -s '. ' -w 10 file.txt` |
 
-https://ryanstutorials.net/linuxtutorial/filters.php
+| Description                                                                                       | `bash`                                                                           | `PowerShell` |
+| ------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | ------------ |
+| Concatenate and display files                                                                     | `cat file.txt file2.txt`                                                         |
+| Concatenate and print in reverse                                                                  | `tac file.txt`                                                                   |
+| Search for patterns                                                                               | `grep 'error' file.txt`                                                          |
+| Search for patterns ignoring case sensitivity                                                     | `grep -i 'error' file.txt`                                                       |
+| Search for patterns inverting the match                                                           | `grep -v 'error' file.txt`                                                       |
+| Search for patterns recursively through directories and print line number of occurrence           | `grep -rn 'error'`                                                               |
+| Print first and third fields of each line                                                         | `awk '{print $1, $3}' file.txt`                                                  |
+| Print first and third fields of each line delimited by comma                                      | `awk -F , '{print $1, $3}' file.csv`                                             |
+| Calculate the sum of the second column in a csv file                                              | `awk -F , '{sum+=$2} END {print sum}' file.csv`                                  |
+| Print second field of each line ignoring the first one                                            | `awk 'NR>1 {print $2}' file.txt`                                                 |
+| Print matched groups of a regex                                                                   | `awk 'match($0, /\[(.*)\] (.*)/, a) {print "["a[1]"] ==> ("a[2]")"}' file.md`    |
+| Replace text in file and print to stdout                                                          | `sed 's/old/new/g' file.txt`                                                     |
+| Replace text in file using multiple commands and print to stdout                                  | `sed -e 's/old1/new1/g' -e 's/old2/new2/g' file.txt`                             |
+| Replace text in file and save in-place                                                            | `sed -i 's/old/new/g' file.txt`                                                  |
+| Display invisible/escaped characters                                                              | `echo -e 'a\nb' \| sed -n l`                                                     |
+| Print the second field from each line using whitespaces as the delimiter                          | `cut -f 2 file.txt`                                                              |
+| Print the second field from each line using a comma as the delimiter                              | `cut -d ',' -f 2 file.csv`                                                       |
+| Print the first and third fields from each line using a comma as the delimiter                    | `cut -d ',' -f 1,3 file.csv`                                                     |
+| Print the first, second and third fields from each line using a comma as the delimiter            | `cut -d ',' -f 1-3 file.csv` <br> `cut -d ',' -f -3 file.csv`                    |
+| Print all fields but the second one                                                               | `cut --complement -f 2 file.txt`                                                 |
+| Print the second field from each line and omit lines not containing the delimiter                 | `cut -d ',' -f 2 -s file.csv`                                                    |
+| Print the first, second and third fields from each line and use a semicolon to delimit the output | `cut -d ',' -f 1-3 --output-delimiter ';' file.csv`                              |
+| Print 'springen' from 'drüberspringen' (counts in bytes, not amount of characters)                | `echo 'drüberspringen' \| cut -b 8-15` <br> `echo 'drüberspringen' \| cut -b 8-` |
+| Sort lines                                                                                        | `sort file.txt`                                                                  |
+| Sort lines numerically                                                                            | `sort -n file.txt`                                                               |
+| Sort lines descending                                                                             | `sort -r file.txt`                                                               |
+| Sort lines ignoring casing                                                                        | `sort -f file.txt`                                                               |
+| Sort lines starting from the second column until the last column separated by whitespace          | `sort -k2 file.txt`                                                              |
+| Sort lines by the second column, then numerically by the first column, separated by whitespace    | `sort -k2,2 -k1,1n file.txt`                                                     |
+| Sort lines by the second column in reverse order ignoring the case separated by comma             | `sort -k2,2rf -t, file.txt`                                                      |
+| Sort lines and write output to file                                                               | `sort file.txt -o file.txt`                                                      |
+| Omit duplicate lines                                                                              | `sort file.txt \| uniq`                                                          |
+| Count occurrences of duplicate lines                                                              | `sort file.txt \| uniq -c`                                                       |
+| Only print duplicate lines                                                                        | `sort file.txt \| uniq -d`                                                       |
+| Only print unique lines                                                                           | `sort file.txt \| uniq -u`                                                       |
+| Print first 10 lines of a file                                                                    | `head file.txt`                                                                  |
+| Print first 20 lines of a file                                                                    | `head -20 file.txt`                                                              |
+| Print last 10 lines of a file                                                                     | `tail file.txt`                                                                  |
+| Print last 20 lines of a file                                                                     | `tail -20 file.txt`                                                              |
+| Print all lines but the first one of a file                                                       | `tail -n +2 file.csv`                                                            |
+| Print and follow last 10 lines of a file                                                          | `tail -n 20 -f file.txt`                                                         |
+| Transform to uppercase                                                                            | `echo 'Hello World' \| tr 'a-z' 'A-Z'`                                           |
+| Delete all numbers from input                                                                     | `echo 'Hello World 123' \| tr -d '0-9'`                                          |
+| Squeeze all spaces                                                                                | `echo 'Hello   World' \| tr -s ' '`                                              |
+| Print count of lines, words and characters                                                        | `wc file.txt`                                                                    |
+| Print count of either lines, words and characters or combined                                     | `wc file.txt` <br> `wc -l file.txt` <br> `wc -lwc file.txt`                      |
+| Wrap lines at 50 characters                                                                       | `fmt -w 50 file.txt`                                                             |
+| Print line numbers                                                                                | `nl file.txt`                                                                    |
+| Print line numbers with dots and padding                                                          | `nl -s '. ' -w 10 file.txt`                                                      |
+| Redirect output to both stdout and file                                                           | `echo 'Hello World' \| tee file.txt`                                             |
+| Compare outputs of two commands                                                                   | `diff <(command1) <(command2)`                                                   |
+| Merge lines of files separated by space                                                           | `paste file1.txt file2.txt`                                                      |
+| Merge lines of files separated by underscore                                                      | `paste -d '_' file1.txt file2.txt`                                               |
+| Merge lines of files separated by underscore and comma                                            | `paste -d '_,' file1.txt file2.txt file3.txt`                                    |
+| Merge lines of files in column-order                                                              | `paste -s file1.txt file2.txt`                                                   |
+| **jq ??? ...**                                                                                    |
+
+## User Management
+
+| Description | `bash` | `PowerShell` |
+| ----------- | ------ | ------------ |
+
+## Package Management
+
+| Description | `bash` | `PowerShell` |
+| ----------- | ------ | ------------ |
+
+## SSH
+
+| Description | `bash` | `PowerShell` |
+| ----------- | ------ | ------------ |
+
+## Network File Transfer
+
+| Description | `bash` | `PowerShell` |
+| ----------- | ------ | ------------ |
+
+https://roadmap.sh/linux
+https://linuxhandbook.com/sort-command/
