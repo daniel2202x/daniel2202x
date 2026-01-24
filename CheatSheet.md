@@ -231,5 +231,8 @@
 | Description | `bash` | `PowerShell` |
 | ----------- | ------ | ------------ |
 
+## curl
+
+## wget
+
 https://roadmap.sh/linux
-https://linuxhandbook.com/sort-command/
