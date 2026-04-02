@@ -49,7 +49,7 @@ services:
                 "editor.defaultFormatter": "esbenp.prettier-vscode"
               }
             }
-            EOF
+        EOF
         RUN git config --global user.email "d.landgraf2000@icloud.com" && \
             git config --global user.name "daniel2202x" && \
             git config --global pull.rebase false
