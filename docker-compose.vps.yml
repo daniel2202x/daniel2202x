@@ -1,0 +1,56 @@
+services:
+  code-server:
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    network_mode: host
+    build:
+      pull: true
+      dockerfile_inline: |
+        FROM debian:latest
+        RUN apt update && apt install -y --no-install-recommends \
+                ca-certificates \
+                curl \
+                fonts-liberation \
+                gnupg \
+                htop \
+                jq \
+                libasound2 \
+                libgbm-dev \
+                libgtk-3-0 \
+                libnotify-dev \
+                libnss3 \
+                libxss1 \
+                libxtst6 \
+                openbox \
+                tree \
+                unzip \
+                wget \
+                xauth \
+                xdg-utils \
+                xorg \
+                xvfb \
+                zip \
+              && rm -rf /var/lib/apt/lists/*
+        RUN curl -fsSL https://get.docker.com | sh
+        RUN curl -fsSL https://deb.nodesource.com/setup_24.x | bash && \
+              apt install -y --no-install-recommends nodejs && rm -rf /var/lib/apt/lists/*
+        RUN curl -fsSL https://code-server.dev/install.sh | sh && \
+              code-server --install-extension angular.ng-template \
+                          --install-extension dbaeumer.vscode-eslint \
+                          --install-extension esbenp.prettier-vscode
+        RUN cat << EOF > /root/.local/share/code-server/User/settings.json
+            {
+              "workbench.colorTheme": "Default Dark+",
+              "git.enableSmartCommit": true,
+              "git.confirmSync": false,
+              "git.autofetch": true,
+              "[typescript]": {
+                "editor.defaultFormatter": "esbenp.prettier-vscode"
+              }
+            }
+            EOF
+        RUN git config --global user.email "d.landgraf2000@icloud.com" && \
+            git config --global user.name "daniel2202x" && \
+            git config --global pull.rebase false
+        ENTRYPOINT ["code-server"]
