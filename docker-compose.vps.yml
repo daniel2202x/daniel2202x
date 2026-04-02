@@ -1,3 +1,5 @@
+# echo 'ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPMmo3NvDNNeXV1OzCTPINkrywWjgXKpmZvnHys2w25u root@gha-runner' >> ~/.ssh/authorized_keys
+
 name: code-server
 
 secrets:
@@ -75,9 +77,37 @@ services:
         RUN --mount=type=secret,id=namecheap-api-key,required=true \
               echo "dns_namecheap_username=dlandgraf" > /defaults/dns-conf/namecheap.ini && \
               echo "dns_namecheap_api_key=$(cat /run/secrets/namecheap-api-key)" >> /defaults/dns-conf/namecheap.ini
+        RUN cat << EOF > /defaults/nginx/site-confs/default.conf.sample
+        server {
+            listen 80 default_server;
+            listen [::]:80 default_server;
+        
+            location / {
+                return 301 https://$host$request_uri;
+            }
+        }
+        
+        server {
+            listen 443 ssl default_server;
+            listen [::]:443 ssl default_server;
+            server_name _;
+        
+            include /config/nginx/ssl.conf;
+
+            location / {
+              proxy_pass http://host.docker.internal:8080/;
+              proxy_set_header Host $http_host;
+              proxy_set_header Upgrade $http_upgrade;
+              proxy_set_header Connection upgrade;
+              proxy_set_header Accept-Encoding gzip;
+            }
+        }
+        EOF
     ports:
       - 80:80
       - 443:443
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     environment:
       PUID: 1000
       PGID: 1000
