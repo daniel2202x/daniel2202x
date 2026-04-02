@@ -1,6 +1,14 @@
+name: code-server
+
 secrets:
   code-server-password:
     environment: CODE_SERVER_PASSWORD
+  namecheap-api-key:
+    environment: NAMECHEAP_API_KEY
+
+volumes:
+  swag_etc:
+  swag_keys:
 
 services:
   code-server:
@@ -54,3 +62,29 @@ services:
         cert: false
         EOF
         ENTRYPOINT ["code-server"]
+
+  swag:
+    container_name: swag
+    restart: always
+    build:
+      pull: true
+      secrets:
+        - namecheap-api-key
+      dockerfile_inline: |
+        FROM linuxserver/swag:latest
+        RUN --mount=type=secret,id=namecheap-api-key,required=true \
+              echo "dns_namecheap_username=dlandgraf" > /defaults/dns-conf/namecheap.ini && \
+              echo "dns_namecheap_api_key=$(cat /run/secrets/namecheap-api-key)" >> /defaults/dns-conf/namecheap.ini
+    ports:
+      - 80:80
+      - 443:443
+    environment:
+      PUID: 1000
+      PGID: 1000
+      TZ: UTC
+      URL: dev.fluently.to
+      VALIDATION: dns
+      DNSPLUGIN: namecheap
+    volumes:
+      - swag_etc:/config/etc
+      - swag_keys:/config/keys
