@@ -1,0 +1,29 @@
+name: Deploy code-server on VPS
+
+on:
+  push:
+    branches:
+      - main
+
+concurrency:
+  group: deploy-workflow
+  cancel-in-progress: false
+
+jobs:
+  deploy-code-server:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Setup SSH key
+        run: |
+          mkdir -p ~/.ssh
+          echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan -H dev.fluently.to >> ~/.ssh/known_hosts
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Install runner
+        run: cat docker-compose.vps.yml | ssh root@dev.fluently.to "docker compose -f - up --build -d"
