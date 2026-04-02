@@ -50,7 +50,7 @@ services:
         cat << EOF > /root/.config/code-server/config.yaml
         bind-addr: 0.0.0.0:8080
         auth: password
-        password: $(cat /run/secrets/code-server-password)
+        password: "$(cat /run/secrets/code-server-password)"
         cert: false
         EOF
         ENTRYPOINT ["code-server"]
