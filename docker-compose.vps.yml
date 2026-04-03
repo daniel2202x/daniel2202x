@@ -58,7 +58,7 @@ services:
         EOF
         RUN --mount=type=secret,id=code-server-password,required=true \
         cat << EOF > /root/.config/code-server/config.yaml
-        bind-addr: 0.0.0.0:8080
+        bind-addr: 0.0.0.0:81
         auth: password
         password: "$(cat /run/secrets/code-server-password)"
         cert: false
@@ -77,25 +77,21 @@ services:
         RUN --mount=type=secret,id=namecheap-api-key,required=true \
               echo "dns_namecheap_username=dlandgraf" > /defaults/dns-conf/namecheap.ini && \
               echo "dns_namecheap_api_key=$(cat /run/secrets/namecheap-api-key)" >> /defaults/dns-conf/namecheap.ini
-        RUN cat << EOF > /defaults/nginx/site-confs/default.conf.sample
+        RUN cat << 'EOF' > /defaults/nginx/site-confs/default.conf.sample
         server {
             listen 80 default_server;
             listen [::]:80 default_server;
-        
             location / {
                 return 301 https://$host$request_uri;
             }
         }
-        
         server {
             listen 443 ssl default_server;
             listen [::]:443 ssl default_server;
             server_name _;
-        
             include /config/nginx/ssl.conf;
-
             location / {
-              proxy_pass http://host.docker.internal:8080/;
+              proxy_pass http://host.docker.internal:81/;
               proxy_set_header Host $http_host;
               proxy_set_header Upgrade $http_upgrade;
               proxy_set_header Connection upgrade;
