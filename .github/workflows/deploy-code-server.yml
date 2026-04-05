@@ -27,7 +27,7 @@ jobs:
 
       - name: Install code-server
         run: |
-          export SSH_VPS_PRIVATE_KEY_BASE64=$(echo "$SSH_VPS_PRIVATE_KEY" | base64)
+          export SSH_VPS_PRIVATE_KEY_BASE64=$(echo "$SSH_VPS_PRIVATE_KEY" | base64 -w 0)
           cat docker-compose.vps.yml | ssh root@dev.fluently.to "
             export CODE_SERVER_PASSWORD=$CODE_SERVER_PASSWORD
             export SSH_VPS_PRIVATE_KEY=\$(echo "$SSH_VPS_PRIVATE_KEY_BASE64" | base64 -d)
