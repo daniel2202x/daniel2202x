@@ -63,6 +63,7 @@ services:
         password: "$(cat /run/secrets/code-server-password)"
         cert: false
         EOF
+        ADD --keep-git-dir=true git@github.com:daniel2202x/daniel2202x.git /root/workspace/
         ENTRYPOINT ["code-server"]
 
   swag:
