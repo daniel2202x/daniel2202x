@@ -26,8 +26,10 @@ jobs:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
 
       - name: Install code-server
-        run: cat docker-compose.vps.yml | ssh root@dev.fluently.to "CODE_SERVER_PASSWORD=$CODE_SERVER_PASSWORD NAMECHEAP_USERNAME=$NAMECHEAP_USERNAME NAMECHEAP_API_KEY=$NAMECHEAP_API_KEY docker compose -f - up --build --force-recreate --renew-anon-volumes --wait"
+        run: cat docker-compose.vps.yml | ssh root@dev.fluently.to "CODE_SERVER_PASSWORD=$CODE_SERVER_PASSWORD SSH_VPS_PRIVATE_KEY=$SSH_VPS_PRIVATE_KEY SSH_VPS_PUBLIC_KEY=$SSH_VPS_PUBLIC_KEY NAMECHEAP_USERNAME=$NAMECHEAP_USERNAME NAMECHEAP_API_KEY=$NAMECHEAP_API_KEY docker compose -f - up --build --force-recreate --renew-anon-volumes --wait"
         env:
           CODE_SERVER_PASSWORD: ${{ secrets.CODE_SERVER_PASSWORD }}
+          SSH_VPS_PRIVATE_KEY: ${{ secrets.SSH_VPS_PRIVATE_KEY }}
+          SSH_VPS_PUBLIC_KEY: ${{ secrets.SSH_VPS_PUBLIC_KEY }}
           NAMECHEAP_USERNAME: ${{ secrets.NAMECHEAP_USERNAME }}
           NAMECHEAP_API_KEY: ${{ secrets.NAMECHEAP_API_KEY }}
