@@ -19,10 +19,14 @@ services:
     network_mode: host
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /root/workspace:/root/workspace
+    secrets:
+      - code-server-password
+    healthcheck:
+      test: curl -f http://localhost:81 || exit 1
+      interval: 5s
     build:
       pull: true
-      secrets:
-        - code-server-password
       dockerfile_inline: |
         FROM debian:latest
         RUN apt update && apt install -y --no-install-recommends \
@@ -38,9 +42,6 @@ services:
         RUN curl -fsSL https://get.docker.com | sh
         RUN curl -fsSL https://deb.nodesource.com/setup_24.x | bash && \
               apt install -y --no-install-recommends nodejs && rm -rf /var/lib/apt/lists/*
-        RUN git config --global user.email "d.landgraf2000@icloud.com" && \
-            git config --global user.name "daniel2202x" && \
-            git config --global pull.rebase false
         RUN curl -fsSL https://code-server.dev/install.sh | sh && \
               code-server --install-extension angular.ng-template \
                           --install-extension dbaeumer.vscode-eslint \
@@ -56,14 +57,22 @@ services:
           }
         }
         EOF
-        RUN --mount=type=secret,id=code-server-password,required=true \
-        cat << EOF > /root/.config/code-server/config.yaml
+        RUN git config --global user.email "d.landgraf2000@icloud.com" && \
+            git config --global user.name "daniel2202x" && \
+            git config --global pull.rebase false
+        RUN cat << 'EOF_ENTRYPOINT' > /entrypoint.sh
+        #!/bin/sh
+        set -e
+        cat << EOF_CODE_SERVER_CONF > /root/.config/code-server/config.yaml
         bind-addr: 0.0.0.0:81
         auth: password
         password: "$(cat /run/secrets/code-server-password)"
         cert: false
-        EOF
-        ENTRYPOINT ["code-server"]
+        EOF_CODE_SERVER_CONF
+        exec code-server
+        EOF_ENTRYPOINT
+        RUN chmod +x /entrypoint.sh
+        ENTRYPOINT ["/entrypoint.sh"]
 
   swag:
     container_name: swag
@@ -83,10 +92,14 @@ services:
     volumes:
       - swag_etc:/config/etc
       - swag_keys:/config/keys
+    secrets:
+      - namecheap-api-key
+    healthcheck:
+      test: curl -f http://localhost:80 || exit 1
+      start_period: 1m
+      interval: 5s
     build:
       pull: true
-      secrets:
-        - namecheap-api-key
       dockerfile_inline: |
         FROM linuxserver/swag:latest
         RUN cat << 'EOF' > /defaults/nginx/site-confs/default.conf.sample
@@ -111,6 +124,14 @@ services:
             }
         }
         EOF
-        RUN --mount=type=secret,id=namecheap-api-key,required=true \
-              echo "dns_namecheap_username=dlandgraf" > /defaults/dns-conf/namecheap.ini && \
-              echo "dns_namecheap_api_key=$(cat /run/secrets/namecheap-api-key)" >> /defaults/dns-conf/namecheap.ini
+        RUN cat << 'EOF_ENTRYPOINT' > /entrypoint.sh
+        #!/bin/sh
+        set -e
+        cat << EOF_SWAG_NC_INI > /defaults/dns-conf/namecheap.ini
+        dns_namecheap_username=dlandgraf
+        dns_namecheap_api_key=$(cat /run/secrets/namecheap-api-key)
+        EOF_SWAG_NC_INI
+        exec /init
+        EOF_ENTRYPOINT
+        RUN chmod +x /entrypoint.sh
+        ENTRYPOINT ["/entrypoint.sh"]
