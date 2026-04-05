@@ -5,6 +5,10 @@ name: code-server
 secrets:
   code-server-password:
     environment: CODE_SERVER_PASSWORD
+  ssh-vps-private-key:
+    environment: SSH_VPS_PRIVATE_KEY
+  ssh-vps-public-key:
+    environment: SSH_VPS_PUBLIC_KEY
   namecheap-username:
     environment: NAMECHEAP_USERNAME
   namecheap-api-key:
@@ -24,6 +28,8 @@ services:
       - /root/workspace:/root/workspace
     secrets:
       - code-server-password
+      - ssh-vps-private-key
+      - ssh-vps-public-key
     healthcheck:
       test: curl -f http://localhost:81 || exit 1
       interval: 5s
@@ -48,7 +54,7 @@ services:
               code-server --install-extension angular.ng-template \
                           --install-extension dbaeumer.vscode-eslint \
                           --install-extension esbenp.prettier-vscode
-        RUN cat << EOF > /root/.local/share/code-server/User/settings.json
+        RUN cat << EOF > ~/.local/share/code-server/User/settings.json
         {
           "workbench.colorTheme": "Default Dark+",
           "git.enableSmartCommit": true,
@@ -65,12 +71,15 @@ services:
         RUN cat << 'EOF_ENTRYPOINT' > /entrypoint.sh
         #!/bin/sh
         set -e
-        cat << EOF_CODE_SERVER_CONF > /root/.config/code-server/config.yaml
+        cat << EOF_CODE_SERVER_CONF > ~/.config/code-server/config.yaml
         bind-addr: 0.0.0.0:81
         auth: password
         password: "$(cat /run/secrets/code-server-password)"
         cert: false
         EOF_CODE_SERVER_CONF
+        cp /run/secrets/ssh-vps-private-key ~/.ssh/id_ed25519
+        cp /run/secrets/ssh-vps-public-key ~/.ssh/id_ed25519.pub
+        chmod 600 ~/.ssh/id_ed25519 ~/.ssh/id_ed25519.pub
         exec code-server
         EOF_ENTRYPOINT
         RUN chmod +x /entrypoint.sh
