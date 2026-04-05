@@ -80,6 +80,7 @@ services:
         cp /run/secrets/ssh-vps-private-key ~/.ssh/id_ed25519
         cp /run/secrets/ssh-vps-public-key ~/.ssh/id_ed25519.pub
         chmod 600 ~/.ssh/id_ed25519 ~/.ssh/id_ed25519.pub
+        echo >> ~/.ssh/id_ed25519
         exec code-server
         EOF_ENTRYPOINT
         RUN chmod +x /entrypoint.sh
