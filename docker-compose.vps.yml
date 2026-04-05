@@ -16,9 +16,9 @@ services:
   code-server:
     container_name: code-server
     restart: always
+    network_mode: host
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
-    network_mode: host
     build:
       pull: true
       secrets:
@@ -63,21 +63,32 @@ services:
         password: "$(cat /run/secrets/code-server-password)"
         cert: false
         EOF
-        ADD --keep-git-dir=true git@github.com:daniel2202x/daniel2202x.git /root/workspace/
         ENTRYPOINT ["code-server"]
 
   swag:
     container_name: swag
     restart: always
+    ports:
+      - 80:80
+      - 443:443
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    environment:
+      PUID: 1000
+      PGID: 1000
+      TZ: UTC
+      URL: dev.fluently.to
+      VALIDATION: dns
+      DNSPLUGIN: namecheap
+    volumes:
+      - swag_etc:/config/etc
+      - swag_keys:/config/keys
     build:
       pull: true
       secrets:
         - namecheap-api-key
       dockerfile_inline: |
         FROM linuxserver/swag:latest
-        RUN --mount=type=secret,id=namecheap-api-key,required=true \
-              echo "dns_namecheap_username=dlandgraf" > /defaults/dns-conf/namecheap.ini && \
-              echo "dns_namecheap_api_key=$(cat /run/secrets/namecheap-api-key)" >> /defaults/dns-conf/namecheap.ini
         RUN cat << 'EOF' > /defaults/nginx/site-confs/default.conf.sample
         server {
             listen 80 default_server;
@@ -100,18 +111,6 @@ services:
             }
         }
         EOF
-    ports:
-      - 80:80
-      - 443:443
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
-    environment:
-      PUID: 1000
-      PGID: 1000
-      TZ: UTC
-      URL: dev.fluently.to
-      VALIDATION: dns
-      DNSPLUGIN: namecheap
-    volumes:
-      - swag_etc:/config/etc
-      - swag_keys:/config/keys
+        RUN --mount=type=secret,id=namecheap-api-key,required=true \
+              echo "dns_namecheap_username=dlandgraf" > /defaults/dns-conf/namecheap.ini && \
+              echo "dns_namecheap_api_key=$(cat /run/secrets/namecheap-api-key)" >> /defaults/dns-conf/namecheap.ini
