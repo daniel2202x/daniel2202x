@@ -5,6 +5,8 @@ name: code-server
 secrets:
   code-server-password:
     environment: CODE_SERVER_PASSWORD
+  namecheap-username:
+    environment: NAMECHEAP_USERNAME
   namecheap-api-key:
     environment: NAMECHEAP_API_KEY
 
@@ -93,6 +95,7 @@ services:
       - swag_etc:/config/etc
       - swag_keys:/config/keys
     secrets:
+      - namecheap-username
       - namecheap-api-key
     healthcheck:
       test: curl -f http://localhost:80 || exit 1
@@ -128,7 +131,7 @@ services:
         #!/bin/sh
         set -e
         cat << EOF_SWAG_NC_INI > /defaults/dns-conf/namecheap.ini
-        dns_namecheap_username=dlandgraf
+        dns_namecheap_username=$(cat /run/secrets/namecheap-username)
         dns_namecheap_api_key=$(cat /run/secrets/namecheap-api-key)
         EOF_SWAG_NC_INI
         exec /init
