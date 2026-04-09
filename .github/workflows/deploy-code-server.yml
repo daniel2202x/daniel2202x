@@ -25,6 +25,9 @@ jobs:
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
 
+      - name: Verify or install Docker
+        run: ssh root@dev.fluently.to 'docker --version || (curl -fsSL https://get.docker.com | sh)'
+
       - name: Install code-server
         run: |
           export SSH_VPS_PRIVATE_KEY_BASE64=$(echo "$SSH_VPS_PRIVATE_KEY" | base64 -w 0)
