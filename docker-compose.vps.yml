@@ -109,7 +109,7 @@ services:
       - namecheap-api-key
     healthcheck:
       test: curl -f http://localhost:80 || exit 1
-      start_period: 1m
+      start_period: 3m
       interval: 5s
     build:
       pull: true
