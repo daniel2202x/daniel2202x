@@ -34,7 +34,7 @@ jobs:
           cat docker-compose.vps.yml | ssh root@dev.fluently.to "
             export CODE_SERVER_PASSWORD=$CODE_SERVER_PASSWORD
             export SSH_VPS_PRIVATE_KEY=\$(echo "$SSH_VPS_PRIVATE_KEY_BASE64" | base64 -d)
-            export SSH_VPS_PUBLIC_KEY=$SSH_VPS_PUBLIC_KEY
+            export SSH_VPS_PUBLIC_KEY='$SSH_VPS_PUBLIC_KEY'
             export NAMECHEAP_USERNAME=$NAMECHEAP_USERNAME
             export NAMECHEAP_API_KEY=$NAMECHEAP_API_KEY
             docker compose -f - up --build --force-recreate --renew-anon-volumes --wait
