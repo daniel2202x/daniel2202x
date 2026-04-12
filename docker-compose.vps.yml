@@ -17,6 +17,7 @@ secrets:
 volumes:
   swag_etc:
   swag_keys:
+  ollama:
 
 services:
   code-server:
@@ -56,13 +57,17 @@ services:
                           --install-extension esbenp.prettier-vscode
         RUN cat << EOF > ~/.local/share/code-server/User/settings.json
         {
-          "workbench.colorTheme": "Default Dark+",
+          "workbench.colorTheme": "Dark+",
           "git.enableSmartCommit": true,
           "git.confirmSync": false,
           "git.autofetch": true,
           "[typescript]": {
             "editor.defaultFormatter": "esbenp.prettier-vscode"
-          }
+          },
+          "[javascript]": {
+            "editor.defaultFormatter": "esbenp.prettier-vscode"
+          },
+          "editor.formatOnSave": true
         }
         EOF
         RUN git config --global user.email "d.landgraf2000@icloud.com" && \
@@ -148,3 +153,29 @@ services:
         EOF_ENTRYPOINT
         RUN chmod +x /entrypoint.sh
         ENTRYPOINT ["/entrypoint.sh"]
+
+  ollama:
+    container_name: ollama
+    restart: always
+    ports:
+      - 11434:11434
+    environment:
+      MODEL: codellama:7b
+      # MODEL: qwen2.5-coder:0.5b
+      # MODEL: qwen2.5-coder:1.5b
+      # MODEL: qwen2.5-coder:3b
+      # MODEL: qwen2.5-coder:7b
+      # MODEL: deepseek-coder:1.3b
+      # MODEL: deepseek-coder:6.7b
+      # MODEL: codegemma:2b
+      # MODEL: codegemma:7b
+      # MODEL: starcoder2:3b
+      # MODEL: starcoder2:7b
+    volumes:
+      - ollama:/root/.ollama
+    healthcheck:
+      test: curl -f http://localhost:11434 || exit 1
+      interval: 5s
+    # mem_limit: 4G
+    image: ollama/ollama:latest
+    pull_policy: always
