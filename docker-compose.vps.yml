@@ -17,7 +17,6 @@ secrets:
 volumes:
   swag_etc:
   swag_keys:
-  ollama:
 
 services:
   code-server:
@@ -26,6 +25,7 @@ services:
     network_mode: host
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /var/lib/docker:/var/lib/docker
       - /root/workspace:/root/workspace
     secrets:
       - code-server-password
@@ -153,29 +153,3 @@ services:
         EOF_ENTRYPOINT
         RUN chmod +x /entrypoint.sh
         ENTRYPOINT ["/entrypoint.sh"]
-
-  ollama:
-    container_name: ollama
-    restart: always
-    ports:
-      - 11434:11434
-    environment:
-      MODEL: codellama:7b
-      # MODEL: qwen2.5-coder:0.5b
-      # MODEL: qwen2.5-coder:1.5b
-      # MODEL: qwen2.5-coder:3b
-      # MODEL: qwen2.5-coder:7b
-      # MODEL: deepseek-coder:1.3b
-      # MODEL: deepseek-coder:6.7b
-      # MODEL: codegemma:2b
-      # MODEL: codegemma:7b
-      # MODEL: starcoder2:3b
-      # MODEL: starcoder2:7b
-    volumes:
-      - ollama:/root/.ollama
-    healthcheck:
-      test: curl -f http://localhost:11434 || exit 1
-      interval: 5s
-    # mem_limit: 4G
-    image: ollama/ollama:latest
-    pull_policy: always
